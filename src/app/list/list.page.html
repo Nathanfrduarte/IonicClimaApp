@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+     Clima
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main">
+  <div class="details">
+  <h2><strong>Condições do Clima</strong></h2>
+  <p>Digite o nome de uma cidade para saber como está seu clima!</p>
+
+  <form [formGroup] ="weatherForm" (ngSubmit)="search(weatherForm.value)">
+    <ion-input placeholder="Nome da cidade. Ex: Betim" formControlName="city"></ion-input>
+
+    <button class="checkWeather" type="submit" [disabled]="!weatherForm.valid">Pesquisar</button> <br>
+    <!-- <button class="checkWeather" type="button">Colocar lembrete no Calendário</button> -->
+  </form>
+  <div class="weather" *ngIf="weather">
+      <div style="margin-top: 50px;">
+          <img [src]="weather.current.weather_icons" />
+          <p class="big">{{weather.current.temperature}}°</p>
+          <p><strong>{{weather.current.weather_descriptions}}</strong></p> 
+      </div>
+      <div>
+          <p>{{weather.location.name}}, <span>{{weather.location.region}}, {{weather.location.country}}</span> </p>
+          <p>{{weather.location.localtime}}</p>
+      </div>  
+  </div>
+</div>
+
+</ion-content>
